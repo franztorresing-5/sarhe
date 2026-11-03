@@ -163,7 +163,7 @@ const App = () => {
               alt="Logotipo Sarhè Consultores"
               width={600}
               height={600}
-              className="w-50 md:w-80 lg:w-[28rem] h-auto object-contain drop-shadow-2xl"
+              className="w-70 md:w-80 lg:w-[28rem] h-auto object-contain drop-shadow-2xl"
               priority
             />
           </div>
