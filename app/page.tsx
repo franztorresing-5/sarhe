@@ -95,7 +95,7 @@ const App = () => {
               alt="Logo Sarhè Consultores"
               width={160}
               height={160}
-              className="w-35 md:w-20 h-auto object-contain"
+              className="w-15 md:w-20 h-auto object-contain"
               priority
             />
           </div>
@@ -157,13 +157,13 @@ const App = () => {
         </div>
 
         <div className="relative z-10 text-center max-w-4xl mx-auto flex flex-col items-center">
-          <div className="w-full flex justify-center pt-12 mb-12">
+          <div className="w-full flex justify-center pt-1 md:pt-10 mb-12">
             <Image
-              src="/princi.jpeg"
+              src="/princi.webp"
               alt="Logotipo Sarhè Consultores"
               width={600}
               height={600}
-              className="w-64 md:w-80 lg:w-[28rem] h-auto object-contain drop-shadow-2xl"
+              className="w-50 md:w-80 lg:w-[28rem] h-auto object-contain drop-shadow-2xl"
               priority
             />
           </div>
