@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Calculator, Scale, FileSearch, Mail, Phone, MapPin, Menu, X, ArrowRight, ChevronUp } from 'lucide-react';
+import Link from 'next/link';
 
 const App = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -15,7 +16,7 @@ const App = () => {
 
       const sections = ['home', 'servicios', 'nosotros', 'contacto'];
       let current = 'home';
-      
+
       for (const section of sections) {
         const element = document.getElementById(section);
         if (element) {
@@ -103,22 +104,22 @@ const App = () => {
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-8 items-center">
             {['servicios', 'nosotros', 'contacto'].map((section) => (
-              <button 
+              <button
                 key={section}
-                onClick={() => scrollToSection(section)} 
-                className={`text-sm tracking-wider uppercase transition-all duration-300 border-b-2 pb-1 ${
-                  activeSection === section 
-                    ? 'border-slate-800 text-slate-900 dark:border-stone-400 dark:text-white' 
-                    : 'border-transparent text-slate-500 hover:text-slate-800 dark:text-stone-400 dark:hover:text-white'
-                }`}
+                onClick={() => scrollToSection(section)}
+                className={`text-sm tracking-wider uppercase transition-all duration-300 border-b-2 pb-1 ${activeSection === section
+                  ? 'border-slate-800 text-slate-900 dark:border-stone-400 dark:text-white'
+                  : 'border-transparent text-slate-500 hover:text-slate-800 dark:text-stone-400 dark:hover:text-white'
+                  }`}
               >
                 {section}
               </button>
             ))}
-            
-            <button onClick={() => scrollToSection('contacto')} className="ml-4 border border-slate-800 dark:border-stone-400/50 px-6 py-2 rounded-sm text-sm tracking-wider text-slate-800 dark:text-stone-300 hover:bg-slate-800 hover:text-white dark:hover:bg-stone-200 dark:hover:text-[#070e1c] transition-all duration-300">
-              AGENDAR CITA
-            </button>
+
+            <Link href="/contacto" className="group flex items-center gap-3 bg-transparent border border-slate-800 text-slate-800 dark:border-stone-300 dark:text-stone-200 px-8 py-4 rounded-sm text-sm tracking-widest uppercase hover:bg-slate-800 hover:text-white dark:hover:bg-stone-200 dark:hover:text-[#070e1c] transition-all duration-500">
+              Agendar Cita
+              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+            </Link>
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -133,14 +134,13 @@ const App = () => {
         {mobileMenuOpen && (
           <div className="md:hidden absolute top-full left-0 w-full bg-white dark:bg-[#070e1c] border-b border-slate-200 dark:border-metallic py-6 px-6 flex flex-col space-y-6 shadow-2xl">
             {['servicios', 'nosotros', 'contacto'].map((section) => (
-              <button 
+              <button
                 key={section}
-                onClick={() => scrollToSection(section)} 
-                className={`text-left text-sm tracking-wider uppercase ${
-                  activeSection === section 
-                    ? 'text-slate-900 font-bold dark:text-white' 
-                    : 'text-slate-600 dark:text-stone-400'
-                }`}
+                onClick={() => scrollToSection(section)}
+                className={`text-left text-sm tracking-wider uppercase ${activeSection === section
+                  ? 'text-slate-900 font-bold dark:text-white'
+                  : 'text-slate-600 dark:text-stone-400'
+                  }`}
               >
                 {section}
               </button>
@@ -172,10 +172,10 @@ const App = () => {
             Excelencia, precisión y ética en soluciones contables, fiscales y legales corporativas para el crecimiento sostenible de su empresa.
           </p>
 
-          <button onClick={() => scrollToSection('contacto')} className="group flex items-center gap-3 bg-transparent border border-slate-800 text-slate-800 dark:border-stone-300 dark:text-stone-200 px-8 py-4 rounded-sm text-sm tracking-widest uppercase hover:bg-slate-800 hover:text-white dark:hover:bg-stone-200 dark:hover:text-[#070e1c] transition-all duration-500">
+          <Link href="/contacto" className="group flex items-center gap-3 bg-transparent border border-slate-800 text-slate-800 dark:border-stone-300 dark:text-stone-200 px-8 py-4 rounded-sm text-sm tracking-widest uppercase hover:bg-slate-800 hover:text-white dark:hover:bg-stone-200 dark:hover:text-[#070e1c] transition-all duration-500">
             Consulta Inicial
             <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-          </button>
+          </Link>
         </div>
       </section>
 
@@ -266,16 +266,16 @@ const App = () => {
               <ul className="space-y-4">
                 <li className="flex items-start gap-3 text-sm text-slate-600 dark:text-stone-400 font-light hover:text-slate-900 dark:hover:text-stone-200 transition-colors">
                   <Phone size={16} className="mt-1 flex-shrink-0" />
-                  <span>+52 (55) 1234 5678</span>
+                  <span>+52 (55) 4576 0897</span>
                 </li>
                 <li className="flex items-start gap-3 text-sm text-slate-600 dark:text-stone-400 font-light hover:text-slate-900 dark:hover:text-stone-200 transition-colors">
                   <Mail size={16} className="mt-1 flex-shrink-0" />
-                  <span>contacto@sarheconsultores.com</span>
+                  <span>sarheconsultoresmx@gmail.com</span>
                 </li>
-                <li className="flex items-start gap-3 text-sm text-slate-600 dark:text-stone-400 font-light hover:text-slate-900 dark:hover:text-stone-200 transition-colors">
+                {/* <li className="flex items-start gap-3 text-sm text-slate-600 dark:text-stone-400 font-light hover:text-slate-900 dark:hover:text-stone-200 transition-colors">
                   <MapPin size={16} className="mt-1 flex-shrink-0" />
                   <span>Torre Corporativa, Piso 14<br />Ciudad de México, CDMX</span>
-                </li>
+                </li> */}
               </ul>
             </div>
 
