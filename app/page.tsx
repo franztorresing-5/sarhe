@@ -91,7 +91,7 @@ const App = () => {
         <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
           <div className="cursor-pointer flex flex-col items-center" onClick={() => scrollToSection('home')}>
             <Image
-              src="/logo.webp"
+              src="/logo.png"
               alt="Logo Sarhè Consultores"
               width={160}
               height={160}
@@ -159,7 +159,7 @@ const App = () => {
         <div className="relative z-10 text-center max-w-4xl mx-auto flex flex-col items-center">
           <div className="w-full flex justify-center pt-12 mb-12">
             <Image
-              src="/princi.webp"
+              src="/princi.png"
               alt="Logotipo Sarhè Consultores"
               width={600}
               height={600}
