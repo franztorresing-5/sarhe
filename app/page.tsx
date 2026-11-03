@@ -90,14 +90,14 @@ const App = () => {
       <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white/90 dark:bg-[#070e1c]/95 backdrop-blur-md py-4 border-b border-slate-200 dark:border-metallic shadow-lg' : 'bg-transparent py-6'}`}>
         <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
           <div className="cursor-pointer flex flex-col items-center" onClick={() => scrollToSection('home')}>
-            {/* <Image
-              src="/logo.svg"
+            <Image
+              src="/logo.webp"
               alt="Logo Sarhè Consultores"
               width={160}
               height={160}
               className="w-35 md:w-20 h-auto object-contain"
               priority
-            /> */}
+            />
           </div>
 
           {/* Desktop Menu */}
@@ -158,14 +158,14 @@ const App = () => {
 
         <div className="relative z-10 text-center max-w-4xl mx-auto flex flex-col items-center">
           <div className="w-full flex justify-center pt-12 mb-12">
-            {/* <Image
-              src="/princi.svg"
+            <Image
+              src="/princi.jpeg"
               alt="Logotipo Sarhè Consultores"
               width={600}
               height={600}
               className="w-64 md:w-80 lg:w-[28rem] h-auto object-contain drop-shadow-2xl"
               priority
-            /> */}
+            />
           </div>
 
           <p className="text-slate-600 dark:text-stone-400 text-lg md:text-xl font-light mb-12 max-w-2xl mx-auto leading-relaxed">
