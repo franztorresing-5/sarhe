@@ -11,6 +11,13 @@ const App = () => {
 
   // Manejar el navbar oscuro y detectar en qué sección estamos
   useEffect(() => {
+
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+
+
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
 
@@ -103,7 +110,7 @@ const App = () => {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-8 items-center">
-            {['servicios', 'nosotros', 'contacto'].map((section) => (
+            {['servicios', 'nosotros'].map((section) => (
               <button
                 key={section}
                 onClick={() => scrollToSection(section)}
@@ -156,7 +163,7 @@ const App = () => {
           <div className="absolute bottom-1/4 right-1/4 w-[30rem] h-[30rem] bg-slate-400 dark:bg-blue-900 rounded-full blur-[50px]"></div>
         </div>
 
-        <div className="relative z-10 text-center max-w-4xl mx-auto flex flex-col items-center">
+        <div className="relative z-10 text-center pb-10 max-w-4xl mx-auto flex flex-col items-center">
           <div className="w-full flex justify-center pt-1 md:pt-10 mb-12">
             <Image
               src="/princi.webp"
