@@ -153,8 +153,12 @@ export default function ContactPage() {
                                     <label className="block text-xs uppercase tracking-widest text-slate-500 dark:text-stone-400 mb-2 font-medium">Área de Interés / Asunto</label>
                                     <select
                                         name="service"
+                                        defaultValue=""
                                         className="w-full bg-slate-50 dark:bg-[#070e1c] border border-slate-300 dark:border-stone-800 rounded-sm px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-slate-600 dark:focus:border-stone-400 transition-colors"
                                     >
+                                        <option value="" disabled className="text-gray-400">
+                                            seleccione una opción
+                                        </option>
                                         <option value="Contabilidad General y Financiera">Contabilidad General y Financiera</option>
                                         <option value="Asesoria Fiscal e Impuestos ">Asesoria Fiscal e Impuestos </option>
                                         <option value="Auditoria y Control Interno">Auditoria y Control Interno</option>
