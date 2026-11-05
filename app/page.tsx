@@ -241,14 +241,49 @@ const App = () => {
       </section>
 
       {/* Info / About Section */}
-      <section id="nosotros" className="py-24 bg-slate-50 dark:bg-[#070e1c] border-t border-slate-200 dark:border-metallic relative z-10">
+      <section id="nosotros" className="py-24 bg-slate-50 dark:bg-[#070e1c] border-t border-slate-200 dark:border-metallic relative z-10 overflow-hidden">
         <div className="container mx-auto px-6 md:px-12">
-          <div className="max-w-4xl mx-auto text-center">
-            <h3 className="font-serif-elegant text-2xl md:text-3xl text-slate-800 dark:text-stone-200 mb-8 leading-relaxed font-light">
-              "Brindamos soluciones estructuradas con rigor ético, transformando la complejidad contable y legal en ventajas competitivas para su negocio."
-            </h3>
-            <p className="text-slate-500 dark:text-stone-400 uppercase tracking-[0.2em] text-sm">El Equipo de Dirección</p>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-center max-w-6xl mx-auto">
+            
+            {/* Columna de Texto */}
+            <div className="text-center lg:text-left order-2 lg:order-1">
+              <h3 className="font-serif-elegant text-3xl md:text-4xl text-metallic mb-6 tracking-wide">
+                Nuestra Firma
+              </h3>
+              <div className="w-12 h-px bg-slate-400 dark:bg-stone-400 mx-auto lg:mx-0 mb-8"></div>
+              
+              <h4 className="font-serif-elegant text-xl md:text-2xl text-slate-800 dark:text-stone-200 mb-8 leading-relaxed font-light italic">
+                "Brindamos soluciones estructuradas con rigor ético, transformando la complejidad contable y legal en ventajas competitivas para su negocio."
+              </h4>
+              
+              <p className="text-slate-600 dark:text-stone-400 text-sm font-light leading-relaxed mb-8">
+                En Sarhè Consultores, entendemos que cada corporativo enfrenta desafíos únicos. Nuestro equipo directivo cuenta con años de experiencia asesorando a empresas para garantizar su cumplimiento normativo, proteger su patrimonio y optimizar sus recursos financieros bajo el marco legal vigente.
+              </p>
+              
+              <p className="text-slate-800 dark:text-stone-300 uppercase tracking-[0.2em] text-xs font-semibold">
+                sarhe Consultores
+              </p>
+            </div>
+
+            {/* Columna de Imagen */}
+            <div className="order-1 lg:order-2">
+              <div className="relative w-full h-[400px] md:h-[500px] rounded-sm overflow-hidden border border-slate-200 dark:border-metallic shadow-2xl group">
+                <Image
+                  src="/oficinapresarhe.webp"
+                  alt="Instalaciones corporativas de Sarhè Consultores"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  style={{ objectFit: 'cover' }}
+                  className="group-hover:scale-105 transition-transform duration-700"
+                />
+                {/* Capa sutil de gradiente oscuro por encima de la imagen */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#070e1c]/80 via-transparent to-transparent opacity-0 dark:opacity-100 pointer-events-none"></div>
+              </div>
+            </div>
+
           </div>
+          
         </div>
       </section>
 
@@ -259,8 +294,8 @@ const App = () => {
             {/* Brand Column */}
             <div className="md:col-span-2">
               <div className="mb-6">
-                <span className="font-serif-elegant text-3xl font-bold tracking-widest text-metallic">SARHÈ</span>
-                <p className="font-sans-clean text-[0.65rem] tracking-[0.3em] text-slate-500 dark:text-stone-400 mt-1">CONSULTORES</p>
+                <span className="font-serif-elegant text-3xl font-bold tracking-widest  ">SARHÈ</span>
+                <p className="font-sans-clean text-[0.65rem] tracking-[0.3em]  mt-1 ">CONSULTORES</p>
               </div>
               <p className="text-slate-600 dark:text-stone-500 text-sm font-light leading-relaxed max-w-sm">
                 Despacho especializado en servicios integrales de contabilidad, auditoría y consultoría legal corporativa.
