@@ -6,11 +6,35 @@ import { ArrowLeft, Mail, Phone, MapPin, Send, CheckCircle2 } from 'lucide-react
 
 export default function ContactPage() {
     const [submitted, setSubmitted] = useState(false);
+    const [loading, setLoading] = useState(false);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // Aquí puedes integrar la lógica para enviar el formulario (EmailJS, API, etc.)
-        setSubmitted(true);
+        setLoading(true);
+
+        const formData = new FormData(e.currentTarget);
+        // Coloca aquí tu Access Key gratuita que te llegó de Web3Forms
+        formData.append("access_key", "bb7c0576-9f37-4fe8-84e2-c04669b89ffb");
+
+        try {
+            const response = await fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                body: formData
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                setSubmitted(true);
+                setLoading(false);
+            } else {
+                setLoading(false);
+                alert("Ocurrió un error al enviar el mensaje. Por favor intente de nuevo.");
+            }
+        } catch (error) {
+            setLoading(false);
+            alert("Error de conexión. Verifique su red e intente nuevamente.");
+        }
     };
 
     return (
@@ -37,9 +61,8 @@ export default function ContactPage() {
         .border-metallic { border-color: rgba(214, 211, 209, 0.2); }
       `}} />
 
-        
-            {/* Header / Botón de Regresar */}
-            <header className=" py-6 px-6 md:px-12 flex justify-center items-center border-b border-slate-200 dark:border-metallic">
+            {/* Header / Logo de Regreso */}
+            <header className="py-6 px-6 md:px-12 flex justify-center items-center border-b border-slate-200 dark:border-metallic">
                 <Link href="/" className="cursor-pointer flex items-center">
                     <Image
                         src="/logo.webp"
@@ -55,7 +78,7 @@ export default function ContactPage() {
             {/* Contenido Principal */}
             <main className="container mx-auto px-6 md:px-12 py-5 max-w-5xl">
                 <div className="text-center mb-6">
-                    <h1 className="font-serif-elegant text-4xl md:text-5xl  mb-4 tracking-wide">
+                    <h1 className="font-serif-elegant text-4xl md:text-5xl mb-4 tracking-wide text-slate-900 dark:text-white">
                         Inicie su Consulta
                     </h1>
                     <p className="text-slate-600 dark:text-stone-400 font-light max-w-xl mx-auto text-sm md:text-base">
@@ -66,9 +89,7 @@ export default function ContactPage() {
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
 
-                    
-
-                    {/* Formulario Moderno (Columna Derecha) */}
+                    {/* Formulario Moderno con Web3Forms */}
                     <div className="lg:col-span-7 bg-white dark:bg-[#0a1426] border border-slate-200 dark:border-metallic p-8 md:p-10 rounded-sm shadow-xl">
                         {submitted ? (
                             <div className="py-16 text-center flex flex-col items-center justify-center space-y-4">
@@ -79,29 +100,37 @@ export default function ContactPage() {
                                 </p>
                                 <button
                                     onClick={() => setSubmitted(false)}
-                                    className="mt-6 text-xs tracking-widest uppercase border-b border-slate-800 dark:border-stone-300 pb-1 hover:opacity-70 transition-opacity"
+                                    className="mt-6 text-xs tracking-widest uppercase border-b border-slate-800 dark:border-stone-300 pb-1 hover:opacity-70 transition-opacity text-slate-800 dark:text-stone-300"
                                 >
                                     Enviar otro mensaje
                                 </button>
                             </div>
                         ) : (
                             <form onSubmit={handleSubmit} className="space-y-6">
+                                {/* Campo oculto para personalizar el asunto en tu correo */}
+                                <input type="hidden" name="subject" value="Nueva cotización o consulta desde Sarhè Consultores" />
+
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div>
                                         <label className="block text-xs uppercase tracking-widest text-slate-500 dark:text-stone-400 mb-2 font-medium">Nombre Completo</label>
                                         <input
                                             required
                                             type="text"
+                                            name="name"
                                             placeholder="Lic. Roberto Gómez"
                                             className="w-full bg-slate-50 dark:bg-[#070e1c] border border-slate-300 dark:border-stone-800 rounded-sm px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-slate-600 dark:focus:border-stone-400 transition-colors"
                                         />
                                     </div>
                                     <div>
-                                        <label className="block text-xs uppercase tracking-widest text-slate-500 dark:text-stone-400 mb-2 font-medium">Teléfono</label>
+                                        <label className="block text-xs uppercase tracking-widest text-slate-500 dark:text-stone-400 mb-2 font-medium">Teléfono (10 dígitos)</label>
                                         <input
                                             required
                                             type="tel"
-                                            placeholder="+52 55 0000 0000"
+                                            name="phone"
+                                            placeholder="5545760897"
+                                            pattern="[0-9]{10}"
+                                            maxLength={10}
+                                            title="Por favor, ingrese un número telefónico válido de 10 dígitos."
                                             className="w-full bg-slate-50 dark:bg-[#070e1c] border border-slate-300 dark:border-stone-800 rounded-sm px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-slate-600 dark:focus:border-stone-400 transition-colors"
                                         />
                                     </div>
@@ -112,18 +141,24 @@ export default function ContactPage() {
                                     <input
                                         required
                                         type="email"
+                                        name="email"
                                         placeholder="roberto@empresa.com"
+                                        pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                                        title="Por favor, ingrese un correo electrónico válido (ejemplo: usuario@dominio.com)"
                                         className="w-full bg-slate-50 dark:bg-[#070e1c] border border-slate-300 dark:border-stone-800 rounded-sm px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-slate-600 dark:focus:border-stone-400 transition-colors"
                                     />
                                 </div>
 
                                 <div>
                                     <label className="block text-xs uppercase tracking-widest text-slate-500 dark:text-stone-400 mb-2 font-medium">Área de Interés / Asunto</label>
-                                    <select className="w-full bg-slate-50 dark:bg-[#070e1c] border border-slate-300 dark:border-stone-800 rounded-sm px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-slate-600 dark:focus:border-stone-400 transition-colors">
-                                        <option>Contabilidad Fiscal y Estratégica</option>
-                                        <option>Auditoría Financiera</option>
-                                        <option>Asesoría y Defensa Legal Corporativa</option>
-                                        <option>Otro servicio corporativo</option>
+                                    <select
+                                        name="service"
+                                        className="w-full bg-slate-50 dark:bg-[#070e1c] border border-slate-300 dark:border-stone-800 rounded-sm px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-slate-600 dark:focus:border-stone-400 transition-colors"
+                                    >
+                                        <option value="Contabilidad Fiscal y Estratégica">Contabilidad Fiscal y Estratégica</option>
+                                        <option value="Auditoría Financiera">Auditoría Financiera</option>
+                                        <option value="Asesoría y Defensa Legal Corporativa">Asesoría y Defensa Legal Corporativa</option>
+                                        <option value="Otro servicio corporativo">Otro servicio corporativo</option>
                                     </select>
                                 </div>
 
@@ -132,6 +167,7 @@ export default function ContactPage() {
                                     <textarea
                                         required
                                         rows={4}
+                                        name="message"
                                         placeholder="Describa brevemente la situación o el servicio que requiere..."
                                         className="w-full bg-slate-50 dark:bg-[#070e1c] border border-slate-300 dark:border-stone-800 rounded-sm px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-slate-600 dark:focus:border-stone-400 transition-colors resize-none"
                                     ></textarea>
@@ -139,14 +175,16 @@ export default function ContactPage() {
 
                                 <button
                                     type="submit"
-                                    className="w-full group flex items-center justify-center gap-3 bg-slate-900 dark:bg-stone-200 text-white dark:text-[#070e1c] py-4 rounded-sm text-sm tracking-widest uppercase hover:bg-slate-800 dark:hover:bg-white transition-all duration-300 font-medium shadow-lg"
+                                    disabled={loading}
+                                    className="w-full group flex items-center justify-center gap-3 bg-slate-900 dark:bg-stone-200 text-white dark:text-[#070e1c] py-4 rounded-sm text-sm tracking-widest uppercase hover:bg-slate-800 dark:hover:bg-white transition-all duration-300 font-medium shadow-lg disabled:opacity-50"
                                 >
-                                    <span>Enviar Mensaje</span>
+                                    <span>{loading ? "Enviando..." : "Enviar Mensaje"}</span>
                                     <Send size={16} className="group-hover:translate-x-1 transition-transform" />
                                 </button>
                             </form>
                         )}
                     </div>
+
                     {/* Información de Contacto (Columna Izquierda) */}
                     <div className="lg:col-span-5 bg-white dark:bg-[#0a1426] border border-slate-200 dark:border-metallic p-8 rounded-sm shadow-xl">
                         <h2 className="font-serif-elegant text-2xl text-slate-900 dark:text-stone-200 mb-6 tracking-wide">
@@ -173,19 +211,9 @@ export default function ContactPage() {
                                 </div>
                                 <div>
                                     <p className="text-xs text-slate-400 uppercase tracking-widest mb-1">Correo Electrónico</p>
-                                    <span className="font-medium"> sarheconsultoresmx@gmail.com</span>
+                                    <span className="font-medium">sarheconsultoresmx@gmail.com</span>
                                 </div>
                             </li>
-
-                            {/* <li className="flex items-start gap-4 text-sm text-slate-700 dark:text-stone-300">
-                                <div className="p-3 bg-slate-100 dark:bg-stone-900 border border-slate-200 dark:border-stone-700 rounded-full">
-                                    <MapPin size={18} className="text-slate-700 dark:text-stone-300" />
-                                </div>
-                                <div>
-                                    <p className="text-xs text-slate-400 uppercase tracking-widest mb-1">Ubicación</p>
-                                    <span className="font-medium">Torre Corporativa, Piso 14<br />Ciudad de México, CDMX</span>
-                                </div>
-                            </li> */}
                         </ul>
                     </div>
 
