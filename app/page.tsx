@@ -248,7 +248,7 @@ const App = () => {
             
             {/* Columna de Texto */}
             <div className="text-center lg:text-left order-2 lg:order-1">
-              <h3 className="font-serif-elegant text-3xl md:text-4xl text-metallic mb-6 tracking-wide">
+              <h3 className="font-serif-elegant text-3xl md:text-4xl mb-6 tracking-wide">
                 Nuestra Firma
               </h3>
               <div className="w-12 h-px bg-slate-400 dark:bg-stone-400 mx-auto lg:mx-0 mb-8"></div>
