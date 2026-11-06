@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+/* El modo oscuro se activa con la clase "dark" en <html>, no según el sistema */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Barras de desplazamiento y controles del navegador también en oscuro */
+html {
+  color-scheme: dark;
+}
