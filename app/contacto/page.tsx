@@ -162,7 +162,7 @@ export default function ContactPage() {
                                         />
                                     </div>
                                     <div>
-                                        <label className="block text-xs uppercase tracking-widest text-slate-500 dark:text-stone-400 mb-2 font-medium">Teléfono (opcional, 10 dígitos)</label>
+                                        <label className="block text-xs uppercase tracking-widest text-slate-500 dark:text-stone-400 mb-2 font-medium">Teléfono (opcional)</label>
                                         <input
                                             type="tel"
                                             inputMode="numeric"
@@ -286,7 +286,7 @@ export default function ContactPage() {
                             Atención personalizada para empresas y corporativos con cita previa en nuestras oficinas o vía digital.
                         </p>
 
-                        <ul className="space-y-6">
+                        <ul className="space-y-6 ">
                             <li className="flex items-start gap-4 text-sm text-slate-700 dark:text-stone-300">
                                 <div className="p-3 bg-slate-100 dark:bg-stone-900 border border-slate-200 dark:border-stone-700 rounded-full">
                                     <Phone size={18} className="text-slate-700 dark:text-stone-300" />
@@ -303,7 +303,7 @@ export default function ContactPage() {
                                 </div>
                                 <div>
                                     <p className="text-xs text-slate-400 uppercase tracking-widest mb-1">Correo Electrónico</p>
-                                    <span className="font-medium">sarheconsultoresmx@gmail.com</span>
+                                    <span className="font-medium break-all">sarheconsultoresmx@gmail.com</span>
                                 </div>
                             </li>
                         </ul>
