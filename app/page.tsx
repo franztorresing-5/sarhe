@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { Calculator, Scale, FileSearch, Mail, Phone, MapPin, Menu, X, ArrowRight, ChevronUp } from 'lucide-react';
+import { Calculator, Scale, FileSearch, Mail, Phone, Menu, X, ArrowRight, ChevronUp } from 'lucide-react';
 import Link from 'next/link';
 
 const App = () => {
@@ -254,7 +254,7 @@ const App = () => {
               <div className="w-12 h-px bg-slate-400 dark:bg-stone-400 mx-auto lg:mx-0 mb-8"></div>
               
               <h4 className="font-serif-elegant text-xl md:text-2xl text-slate-800 dark:text-stone-200 mb-8 leading-relaxed font-light italic">
-                "Brindamos soluciones estructuradas con rigor ético, transformando la complejidad contable y legal en ventajas competitivas para su negocio."
+                &ldquo;Brindamos soluciones estructuradas con rigor ético, transformando la complejidad contable y legal en ventajas competitivas para su negocio.&rdquo;
               </h4>
               
               <p className="text-slate-600 dark:text-stone-400 text-sm font-light leading-relaxed mb-8">
@@ -271,7 +271,7 @@ const App = () => {
               <div className="relative w-full h-[400px] md:h-[500px] rounded-sm overflow-hidden border border-slate-200 dark:border-metallic shadow-2xl group">
                 <Image
                   src="/oficinapresarhe.webp"
-                  alt="Instalaciones corporativas de Sarhè Consultores"
+                  alt="Ilustración generada con inteligencia artificial de una oficina con el logotipo de Sarhè Consultores"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   style={{ objectFit: 'cover' }}
@@ -280,6 +280,9 @@ const App = () => {
                 {/* Capa sutil de gradiente oscuro por encima de la imagen */}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#070e1c]/80 via-transparent to-transparent opacity-0 dark:opacity-100 pointer-events-none"></div>
               </div>
+              <p className="mt-3 text-xs text-slate-500 dark:text-stone-500 text-center lg:text-right">
+                Imagen ilustrativa generada con inteligencia artificial.
+              </p>
             </div>
 
           </div>
@@ -325,9 +328,10 @@ const App = () => {
             <div>
               <h4 className="text-slate-800 dark:text-stone-200 text-xs tracking-[0.2em] uppercase mb-6 font-semibold">Legal</h4>
               <ul className="space-y-3">
-                <li><a href="#" className="text-sm text-slate-600 dark:text-stone-400 font-light hover:text-slate-900 dark:hover:text-stone-200 transition-colors">Aviso de Privacidad</a></li>
-                <li><a href="#" className="text-sm text-slate-600 dark:text-stone-400 font-light hover:text-slate-900 dark:hover:text-stone-200 transition-colors">Términos y Condiciones</a></li>
-                <li><a href="#" className="text-sm text-slate-600 dark:text-stone-400 font-light hover:text-slate-900 dark:hover:text-stone-200 transition-colors">Bolsa de Trabajo</a></li>
+                <li><Link href="/aviso-de-privacidad" className="text-sm text-slate-600 dark:text-stone-400 font-light hover:text-slate-900 dark:hover:text-stone-200 transition-colors">Aviso de Privacidad</Link></li>
+                <li><Link href="/terminos-y-condiciones" className="text-sm text-slate-600 dark:text-stone-400 font-light hover:text-slate-900 dark:hover:text-stone-200 transition-colors">Términos y Condiciones</Link></li>
+                <li><Link href="/politica-de-cookies" className="text-sm text-slate-600 dark:text-stone-400 font-light hover:text-slate-900 dark:hover:text-stone-200 transition-colors">Política de Cookies</Link></li>
+                <li><Link href="/politica-de-reembolsos" className="text-sm text-slate-600 dark:text-stone-400 font-light hover:text-slate-900 dark:hover:text-stone-200 transition-colors">Política de Reembolsos</Link></li>
               </ul>
             </div>
           </div>

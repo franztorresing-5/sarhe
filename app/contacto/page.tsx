@@ -2,7 +2,8 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowLeft, Mail, Phone, MapPin, Send, CheckCircle2 } from 'lucide-react';
+import { Mail, Phone, Send, CheckCircle2 } from 'lucide-react';
+import { LEGAL } from '../lib/legal';
 
 export default function ContactPage() {
     const [submitted, setSubmitted] = useState(false);
@@ -10,10 +11,45 @@ export default function ContactPage() {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        if (loading) return;
+
+        const form = e.currentTarget;
+        const formData = new FormData(form);
+
+        // Validación en servidor-lado-cliente: nunca confiar solo en los atributos HTML
+        const name = String(formData.get("name") ?? "").trim();
+        const email = String(formData.get("email") ?? "").trim();
+        const phone = String(formData.get("phone") ?? "").trim();
+        const message = String(formData.get("message") ?? "").trim();
+
+        if (!name || !email || !message) {
+            alert("Por favor complete los campos obligatorios.");
+            return;
+        }
+        if (phone && !/^[0-9]{10}$/.test(phone)) {
+            alert("El teléfono debe tener 10 dígitos.");
+            return;
+        }
+        if (!formData.get("acepta_terminos") || !formData.get("acepta_privacidad")) {
+            alert("Para enviar el formulario debe aceptar los Términos y Condiciones y el Aviso de Privacidad.");
+            return;
+        }
+
         setLoading(true);
 
-        const formData = new FormData(e.currentTarget);
-        // Coloca aquí tu Access Key gratuita que te llegó de Web3Forms
+        formData.set("name", name);
+        formData.set("email", email);
+        formData.set("phone", phone);
+        formData.set("message", message);
+
+        // Constancia del consentimiento (se incluye en el correo que recibe el despacho)
+        formData.set("acepta_terminos", "Sí");
+        formData.set("acepta_privacidad", "Sí");
+        formData.set("fecha_consentimiento", new Date().toISOString());
+        formData.set("version_aviso_privacidad", LEGAL.version);
+
+        // Llave PÚBLICA de Web3Forms (está pensada para ir en el navegador).
+        // Protéjala en el panel de Web3Forms: restrinja el dominio permitido y active la protección anti-spam.
         formData.append("access_key", "bb7c0576-9f37-4fe8-84e2-c04669b89ffb");
 
         try {
@@ -31,7 +67,7 @@ export default function ContactPage() {
                 setLoading(false);
                 alert("Ocurrió un error al enviar el mensaje. Por favor intente de nuevo.");
             }
-        } catch (error) {
+        } catch {
             setLoading(false);
             alert("Error de conexión. Verifique su red e intente nuevamente.");
         }
@@ -109,6 +145,8 @@ export default function ContactPage() {
                             <form onSubmit={handleSubmit} className="space-y-6">
                                 {/* Campo oculto para personalizar el asunto en tu correo */}
                                 <input type="hidden" name="subject" value="Nueva cotización o consulta desde Sarhè Consultores" />
+                                {/* Trampa anti-bots (honeypot): las personas no lo ven; si se marca, Web3Forms descarta el envío */}
+                                <input type="checkbox" name="botcheck" tabIndex={-1} autoComplete="off" aria-hidden="true" style={{ display: "none" }} />
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div>
@@ -117,15 +155,18 @@ export default function ContactPage() {
                                             required
                                             type="text"
                                             name="name"
+                                            maxLength={100}
+                                            autoComplete="name"
                                             placeholder="Lic. Roberto Gómez"
                                             className="w-full bg-slate-50 dark:bg-[#070e1c] border border-slate-300 dark:border-stone-800 rounded-sm px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-slate-600 dark:focus:border-stone-400 transition-colors"
                                         />
                                     </div>
                                     <div>
-                                        <label className="block text-xs uppercase tracking-widest text-slate-500 dark:text-stone-400 mb-2 font-medium">Teléfono (10 dígitos)</label>
+                                        <label className="block text-xs uppercase tracking-widest text-slate-500 dark:text-stone-400 mb-2 font-medium">Teléfono (opcional, 10 dígitos)</label>
                                         <input
-                                            required
                                             type="tel"
+                                            inputMode="numeric"
+                                            autoComplete="tel-national"
                                             name="phone"
                                             placeholder="5545760897"
                                             pattern="[0-9]{10}"
@@ -142,6 +183,8 @@ export default function ContactPage() {
                                         required
                                         type="email"
                                         name="email"
+                                        maxLength={254}
+                                        autoComplete="email"
                                         placeholder="roberto@empresa.com"
                                         pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
                                         title="Por favor, ingrese un correo electrónico válido (ejemplo: usuario@dominio.com)"
@@ -157,14 +200,14 @@ export default function ContactPage() {
                                         className="w-full bg-slate-50 dark:bg-[#070e1c] border border-slate-300 dark:border-stone-800 rounded-sm px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-slate-600 dark:focus:border-stone-400 transition-colors"
                                     >
                                         <option value="" disabled className="text-gray-400">
-                                            seleccione una opción
+                                            Seleccione una opción
                                         </option>
                                         <option value="Contabilidad General y Financiera">Contabilidad General y Financiera</option>
-                                        <option value="Asesoria Fiscal e Impuestos ">Asesoria Fiscal e Impuestos </option>
-                                        <option value="Auditoria y Control Interno">Auditoria y Control Interno</option>
-                                        <option value="Nominas y Segurdad Social">Nominas y Segurdad Social</option>
-                                        <option value="Asesoria Legal y Corporativa">Asesoria Legal y Corporativa</option>
-                                        <option value="Capacitacion y Formacion Empresarial">Capacitacion y Formacion Empresarial</option>
+                                        <option value="Asesoría Fiscal e Impuestos">Asesoría Fiscal e Impuestos</option>
+                                        <option value="Auditoría y Control Interno">Auditoría y Control Interno</option>
+                                        <option value="Nóminas y Seguridad Social">Nóminas y Seguridad Social</option>
+                                        <option value="Asesoría Legal y Corporativa">Asesoría Legal y Corporativa</option>
+                                        <option value="Capacitación y Formación Empresarial">Capacitación y Formación Empresarial</option>
                                     </select>
                                 </div>
 
@@ -174,9 +217,52 @@ export default function ContactPage() {
                                         required
                                         rows={4}
                                         name="message"
+                                        minLength={10}
+                                        maxLength={1500}
                                         placeholder="Describa brevemente la situación o el servicio que requiere..."
                                         className="w-full bg-slate-50 dark:bg-[#070e1c] border border-slate-300 dark:border-stone-800 rounded-sm px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-slate-600 dark:focus:border-stone-400 transition-colors resize-none"
                                     ></textarea>
+                                </div>
+
+                                {/* Aviso de datos sensibles */}
+                                <p className="text-xs text-slate-500 dark:text-stone-500 leading-relaxed">
+                                    Por favor no incluya en el mensaje contraseñas, RFC, CURP, e.firma ni datos bancarios.
+                                </p>
+
+                                {/* Consentimientos (casillas separadas, sin marcar por defecto) */}
+                                <div className="space-y-3">
+                                    <div className="flex items-start gap-3">
+                                        <input
+                                            required
+                                            id="acepta_terminos"
+                                            type="checkbox"
+                                            name="acepta_terminos"
+                                            className="mt-1 h-4 w-4 shrink-0 accent-slate-800 dark:accent-stone-300"
+                                        />
+                                        <label htmlFor="acepta_terminos" className="text-sm text-slate-600 dark:text-stone-400 leading-snug">
+                                            He leído y acepto los{" "}
+                                            <Link href="/terminos-y-condiciones" target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 text-slate-900 dark:text-stone-200 hover:opacity-70">
+                                                Términos y Condiciones
+                                            </Link>
+                                            .
+                                        </label>
+                                    </div>
+                                    <div className="flex items-start gap-3">
+                                        <input
+                                            required
+                                            id="acepta_privacidad"
+                                            type="checkbox"
+                                            name="acepta_privacidad"
+                                            className="mt-1 h-4 w-4 shrink-0 accent-slate-800 dark:accent-stone-300"
+                                        />
+                                        <label htmlFor="acepta_privacidad" className="text-sm text-slate-600 dark:text-stone-400 leading-snug">
+                                            He leído el{" "}
+                                            <Link href="/aviso-de-privacidad" target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 text-slate-900 dark:text-stone-200 hover:opacity-70">
+                                                Aviso de Privacidad
+                                            </Link>{" "}
+                                            y consiento el tratamiento de mis datos para que me contacten.
+                                        </label>
+                                    </div>
                                 </div>
 
                                 <button
@@ -224,6 +310,14 @@ export default function ContactPage() {
                     </div>
 
                 </div>
+                <nav aria-label="Documentos legales" className="mt-12 pt-6 border-t border-slate-200 dark:border-stone-800">
+                    <ul className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs text-slate-500 dark:text-stone-500">
+                        <li><Link href="/aviso-de-privacidad" className="underline underline-offset-4 hover:opacity-70">Aviso de Privacidad</Link></li>
+                        <li><Link href="/terminos-y-condiciones" className="underline underline-offset-4 hover:opacity-70">Términos y Condiciones</Link></li>
+                        <li><Link href="/politica-de-cookies" className="underline underline-offset-4 hover:opacity-70">Política de Cookies</Link></li>
+                        <li><Link href="/politica-de-reembolsos" className="underline underline-offset-4 hover:opacity-70">Política de Reembolsos</Link></li>
+                    </ul>
+                </nav>
             </main>
         </div>
     );
