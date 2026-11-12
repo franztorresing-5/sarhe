@@ -1,10 +1,25 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "Sarhè Consultores",
-  description: "Despacho Contable, Auditoría y Asesoría Legal",
-};
-
+  title: 'Sarhè Consultores | Asesoría Fiscal y Legal',
+  description: 'Despacho de asesoría fiscal, contable y legal para corporativos.',
+  openGraph: {
+    title: 'Sarhè Consultores | Asesoría Fiscal y Legal',
+    description: 'Despacho de asesoría fiscal, contable y legal para corporativos. Inicie su consulta hoy.',
+    url: 'https://sarheconsultoresmx.com',
+    siteName: 'Sarhè Consultores',
+    images: [
+      {
+        url: '/sarhe.webp', // Cambia esto por la ruta de tu nueva imagen
+        width: 1200,
+        height: 630,
+        alt: 'Imagen representativa de Sarhè Consultores',
+      },
+    ],
+    locale: 'es_MX',
+    type: 'website',
+  },
+}
 export default function RootLayout({
   children,
 }: {
@@ -18,3 +33,4 @@ export default function RootLayout({
     </html>
   );
 }
+

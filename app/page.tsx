@@ -160,7 +160,7 @@ const App = () => {
       <section id="home" className="relative min-h-screen flex items-center justify-center px-6 pt-20 overflow-hidden">
         <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-slate-300 dark:bg-stone-500 rounded-full blur-[50px]"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-[30rem] h-[30rem] bg-slate-400 dark:bg-blue-900 rounded-full blur-[50px]"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-30rem h-30rem bg-slate-400 dark:bg-blue-900 rounded-full blur-[50px]"></div>
         </div>
 
         <div className="relative z-10 text-center pb-10 max-w-4xl mx-auto flex flex-col items-center">
@@ -170,7 +170,7 @@ const App = () => {
               alt="Logotipo Sarhè Consultores"
               width={160}
               height={160}
-              className="w-65 md:w-80 lg:w-[28rem] h-auto object-contain drop-shadow-2xl"
+              className="w-65 md:w-80 lg:w-28rem h-auto object-contain drop-shadow-2xl"
               priority
             />
           </div>
@@ -201,7 +201,7 @@ const App = () => {
                 <Calculator size={28} className="text-slate-700 dark:text-stone-300" />
               </div>
               <h4 className="font-serif-elegant text-xl text-slate-900 dark:text-stone-200 tracking-wider mb-4 uppercase">Contabilidad Fiscal</h4>
-              <p className="text-slate-600 dark:text-stone-400 font-light text-sm leading-relaxed mb-6 flex-grow">
+              <p className="text-slate-600 dark:text-stone-400 font-light text-sm leading-relaxed mb-6 grow">
                 Estrategias fiscales precisas, cumplimiento normativo y optimización de recursos para garantizar la salud financiera y evitar contingencias legales.
               </p>
               <button className="text-xs tracking-widest text-slate-500 dark:text-stone-300 border-b border-slate-400 dark:border-stone-300 pb-1 hover:text-slate-900 dark:hover:text-white hover:border-slate-900 dark:hover:border-white transition-colors">
@@ -215,7 +215,7 @@ const App = () => {
                 <FileSearch size={28} className="text-slate-700 dark:text-stone-300" />
               </div>
               <h4 className="font-serif-elegant text-xl text-slate-900 dark:text-stone-200 tracking-wider mb-4 uppercase">Auditoría</h4>
-              <p className="text-slate-600 dark:text-stone-400 font-light text-sm leading-relaxed mb-6 flex-grow">
+              <p className="text-slate-600 dark:text-stone-400 font-light text-sm leading-relaxed mb-6 grow">
                 Revisiones exhaustivas e independientes que brindan certeza, transparencia y confianza sobre los estados financieros de su organización.
               </p>
               <button className="text-xs tracking-widest text-slate-500 dark:text-stone-300 border-b border-slate-400 dark:border-stone-300 pb-1 hover:text-slate-900 dark:hover:text-white hover:border-slate-900 dark:hover:border-white transition-colors">
@@ -229,7 +229,7 @@ const App = () => {
                 <Scale size={28} className="text-slate-700 dark:text-stone-300" />
               </div>
               <h4 className="font-serif-elegant text-xl text-slate-900 dark:text-stone-200 tracking-wider mb-4 uppercase">Asesoría Legal</h4>
-              <p className="text-slate-600 dark:text-stone-400 font-light text-sm leading-relaxed mb-6 flex-grow">
+              <p className="text-slate-600 dark:text-stone-400 font-light text-sm leading-relaxed mb-6 grow">
                 Acompañamiento jurídico corporativo y defensa especializada para blindar las operaciones de su empresa ante cualquier escenario normativo.
               </p>
               <button className="text-xs tracking-widest text-slate-500 dark:text-stone-300 border-b border-slate-400 dark:border-stone-300 pb-1 hover:text-slate-900 dark:hover:text-white hover:border-slate-900 dark:hover:border-white transition-colors">
@@ -268,7 +268,7 @@ const App = () => {
 
             {/* Columna de Imagen */}
             <div className="order-1 lg:order-2">
-              <div className="relative w-full h-[400px] md:h-[500px] rounded-sm overflow-hidden border border-slate-200 dark:border-metallic shadow-2xl group">
+              <div className="relative w-full h-400px md:h-500px rounded-sm overflow-hidden border border-slate-200 dark:border-metallic shadow-2xl group">
                 <Image
                   src="/oficinapresarhe.webp"
                   alt="Ilustración generada con inteligencia artificial de una oficina con el logotipo de Sarhè Consultores"
@@ -278,7 +278,7 @@ const App = () => {
                   className="group-hover:scale-105 transition-transform duration-700"
                 />
                 {/* Capa sutil de gradiente oscuro por encima de la imagen */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#070e1c]/80 via-transparent to-transparent opacity-0 dark:opacity-100 pointer-events-none"></div>
+                <div className="absolute inset-0 bg-linear-to-t from-[#070e1c]/80 via-transparent to-transparent opacity-0 dark:opacity-100 pointer-events-none"></div>
               </div>
               <p className="mt-3 text-xs text-slate-500 dark:text-stone-500 text-center lg:text-right">
                 Imagen ilustrativa generada con inteligencia artificial.
@@ -310,11 +310,11 @@ const App = () => {
               <h4 className="text-slate-800 dark:text-stone-200 text-xs tracking-[0.2em] uppercase mb-6 font-semibold">Contacto</h4>
               <ul className="space-y-4">
                 <li className="flex items-start gap-3 text-sm text-slate-600 dark:text-stone-400 font-light hover:text-slate-900 dark:hover:text-stone-200 transition-colors">
-                  <Phone size={16} className="mt-1 flex-shrink-0" />
+                  <Phone size={16} className="mt-1 flex shrink-0" />
                   <span>+52 (55) 4576 0897</span>
                 </li>
                 <li className="flex items-start gap-3 text-sm text-slate-600 dark:text-stone-400 font-light hover:text-slate-900 dark:hover:text-stone-200 transition-colors">
-                  <Mail size={16} className="mt-1 flex-shrink-0" />
+                  <Mail size={16} className="mt-1 flex shrink-0" />
                   <span>sarheconsultoresmx@gmail.com</span>
                 </li>
                 {/* <li className="flex items-start gap-3 text-sm text-slate-600 dark:text-stone-400 font-light hover:text-slate-900 dark:hover:text-stone-200 transition-colors">

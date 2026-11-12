@@ -7,7 +7,7 @@
 export const LEGAL = {
   marca: "Sarhè Consultores",
   responsable: "José Alfredo Sanchez Ramirez",
-  domicilio: "[Herradura, 862, Geovillas de Jesus Maria, 56586, Ixtapaluca, Estado de México, México]",
+  domicilio: "[Herradura, 860, Geovillas de Jesus Maria, 56586, Ixtapaluca, Estado de México, México]",
   correo: "sarheconsultoresmx@gmail.com",
   telefono: "+52 (55) 4576 0897",
   sitio: "https://sarhe.netlify.app",
