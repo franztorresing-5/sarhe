@@ -268,7 +268,7 @@ const App = () => {
 
             {/* Columna de Imagen */}
             <div className="order-1 lg:order-2">
-              <div className="relative w-full h-400px md:h-500px rounded-sm overflow-hidden border border-slate-200 dark:border-metallic shadow-2xl group">
+              <div className="relative w-full h-[400px] md:h-[500px] rounded-sm overflow-hidden border border-slate-200 dark:border-metallic shadow-2xl group">
                 <Image
                   src="/oficinapresarhe.webp"
                   alt="Ilustración generada con inteligencia artificial de una oficina con el logotipo de Sarhè Consultores"
